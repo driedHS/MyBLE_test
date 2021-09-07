@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Bluetooth Controller on The Browser</title>
+
+		<link rel="stylesheet" type="text/css" href="./style.css">
+	</head>
+	<body>
+		<div class="background" id="style">
+			<div class="whiteboard">
+				<div class="display">
+					<div class="state" id="display_mbed_state">state : 0</div>
+					<div class="trigger" id="display_trigger">triger : 0</div>
+					<div class="steering" id="display_steering">steering : 0</div>
+				</div>
+				<div class="controller">
+					<input class="trigger" type="range" id="range_trigger" value="0" min="-100" max="100" step="10">
+					<input class="steering" type="range" id="range_steering" value="0" min="-100" max="100" step="10">
+				</div>
+				<div class="scanner">
+					<div class="connection">
+						<button class="button action_button" onclick="onStartUpButtonClick()" >startup</button>
+						<button class="button action_button" onclick="onResetButtonClick()" >reset</button>
+					</div>
+					<div class="notice">
+						<button class="button action_button" onclick="onStartNotificationsButtonClick()" >on</button>
+						<button class="button action_button" onclick="onStopNotificationsButtonClick()" >off</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="./app.js"></script>
+	
+		<script type="text/javascript">
+			window.onload = function () {
+				/*スライダ操作に反応*/
+				document.getElementById("range_trigger").addEventListener('input', inputSpeedLevel);
+				document.getElementById("range_steering").addEventListener('input', inputSteering);
+			};
+
+			setInterval("write_interval()",1000);
+			function write_interval(){
+				onWriteSpeedLevel();
+			};
+		</script>
+	</body>
+		
+
+
+</html>

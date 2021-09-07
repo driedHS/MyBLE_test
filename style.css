@@ -1,0 +1,140 @@
+.background{
+    background-color: #1d345e;    /*紺*/
+    width: 100vw;               /*背景100%表示*/
+    height: 95vh;               /*背景95%表示*/
+    padding-top: 5vh;               /*四辺に5%の余白*/
+}
+
+.background .whiteboard{
+    width: 600px;
+    height: 420px;
+    background-color: #fff;
+    margin: auto;
+}
+
+.background .whiteboard .display{
+    position: relative;
+    width: 598px;
+    height: 73px;
+    border: 1px solid #eee;
+}
+
+.background .whiteboard .display .state{
+    position: absolute;
+    width: 100px;
+    height: 22px;
+    top: 0px;
+    left: 0px;
+    font-size: 1em;
+    border: 1px solid #eee;
+}
+
+.background .whiteboard .display .trigger{
+    position: absolute;
+    width: 110px;
+    height: 22px;
+    top: 50px;
+    left: 100px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+}
+
+.background .whiteboard .display .steering{
+    position: absolute;
+    width: 120px;
+    height: 22px;
+    top: 50px;
+    right: 100px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+}
+
+
+.background .whiteboard .controller{
+    position: relative;
+    width: 400px;
+    height: 240px;
+    top: 10px;
+    left: 100px;
+    border: 1px solid #eee;   /* 境界 : 幅 | 種類 |色 */
+}
+
+.background .whiteboard .controller .trigger{
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    top: 70px;
+    left: -50px;
+    -webkit-transform:rotate(-90deg);
+       -moz-transform:rotate(-90deg);
+         -o-transform:rotate(-90deg);
+            transform:rotate(-90deg);
+}
+
+.background .whiteboard .controller .steering{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 20px;
+    right: 20px;
+}
+
+.background .whiteboard .scanner{
+    position: relative;
+    top: 50px;
+    left: 0px;
+    width: 598px;
+    height: 90px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+}
+
+.background .whiteboard .scanner .connection{
+    position: absolute;
+    top: 20px;
+    left: 50px;
+}
+
+.background .whiteboard .scanner .notice{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
+
+.action_button {
+    width: 100px;
+    height: 50px;
+    font-size: 1.12em;
+    color: #222;
+    border-style:none;
+    background-color:#eee;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow: 0 2px 1px rgba(136,136,136,1);
+  }
+
+.move_button {
+    font-size: 1.5em;
+    width:60px;
+    height:60px;
+    color: #222;
+    border-style:none;
+    background-color:#eee;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow: 0 2px 1px rgba(136,136,136,1);
+}
+
+.button:hover{
+    background-color:#aaaaaa;
+    box-shadow: 0 2px 1px #777777;
+}
+
+.button:active {
+    background-color: rgb(113, 191, 255);
+    box-shadow: 0 1px 0 #000000;
+
+ }
+
