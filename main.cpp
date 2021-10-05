@@ -34,6 +34,15 @@ typedef struct {
 } mail_t;
 Mail<mail_t, 16> mail_box;
 
+/***************************
+* User-defined Functions
+* - charToInt       Ascii文字な16進引数をintに
+* - stringToInt     charToIntの文字列版 ポインタで返却
+* - ble_get_state   BufferedSerial.sigioのコールバック関数(mainで登録), 受信割り込み時だけフラグ
+* - swX_fall        swによるISRのコールバック関数(mainで登録), 立ち下がりに反応してフラグ
+* - setup           BLEModuleの初期設定用, ユーザ定義サービスは2つ
+***************************/
+
 int charToInt(char myString){
     if(myString >= '0' && myString <= '9')
         return myString - '0';
@@ -94,7 +103,9 @@ void setup(){
 
 /***************************
  * Thread Functions
- * - ble_receive    ble.readableなら起床 文字列取得
+ * - ble_receive    ble.readableなら起床, 文字列取得
+ * - sw_response    ISR内のEventFlagで起床, コマンド送信
+ * - main           Thread起動, 各setup, ble_receiveのmailで起床, 受信データ解析
  ***************************/
 void ble_receive(){
     PC.write(" > start ble_receive\r\n",22);
@@ -132,23 +143,33 @@ void sw_response(){
         
         if((read_flag & SW0FLAG) > 0){
             BLE.write("LS\r\n", 4);
+            mutex.lock();
             PC.write("LS\r\n", 4);
+            mutex.unlock();
         }
         if((read_flag & SW1FLAG) > 0){
             BLE.write("SUW,49a99bde9c9a48e3b85262439e069af1,01\r\n", 41);
+            mutex.lock();
             PC.write("SUW,49a99bde9c9a48e3b85262439e069af1,01\r\n", 41);
+            mutex.lock();
         }
         if((read_flag & SW2FLAG) > 0){
             BLE.write("SUW,49a99bde9c9a48e3b85262439e069af1,02\r\n", 41);
+            mutex.lock();
             PC.write("SUW,49a99bde9c9a48e3b85262439e069af1,02\r\n", 41);
+            mutex.unlock();
         }
         if((read_flag & SW3FLAG) > 0){
             BLE.write("SUW,49a99bde9c9a48e3b85262439e069af1,03\r\n", 41);
+            mutex.lock();
             PC.write("SUW,49a99bde9c9a48e3b85262439e069af1,03\r\n", 41);
+            mutex.unlock();
         }
         if((read_flag & SW4FLAG) > 0){
             BLE.write("SUW,49a99bde9c9a48e3b85262439e069af1,04\r\n", 41);
+            mutex.lock();
             PC.write("SUW,49a99bde9c9a48e3b85262439e069af1,04\r\n", 41);
+            mutex.unlock();
         }
         event_sw.set(0);
     }
